@@ -73,7 +73,7 @@
 
 ![02-whatsapp-product.png](./images/02-whatsapp-product.png)
 
-
+   - Luego en configurar API
 
 ### **Paso 3: Configurar Número de Prueba**
 
@@ -110,18 +110,18 @@
    Formato: 123456789012345
    ```
 
-3. **App ID:**
+4. **App ID (N8N: App ID):**
    ```
    Ubicación: App Settings > Basic > App ID
    Formato: 123456789012345
 
-3. **App secret:**
+5. **App secret (N8N: Client Secret):**
    ```
    Ubicación: App Settings > Basic > App secret
 
 
 ![03-credenciales.png](./images/03-credenciales.png)
-![03-credenciales-2.png](./images/03-credenciales.png)
+![03-credenciales-2.png](./images/03-credenciales-2.png)
 
 ---
 
@@ -194,13 +194,13 @@
 #### **Configurar Credenciales:**
 1. **Crear nueva credencial:**
    - Credential Name: "WhatsApp Business"
-   - Access Token: `EAAx...` (del Paso 3)
-   - Business Account ID: `123...` (del Paso 3)
+   - Client ID: `...` (del Paso 4)
+   - Client Secret: `...` (del Paso 5)
 
 ![10-nodo1-credentials.png](./images/10-nodo1-credentials.png)
 
 #### **Ejecutar y Probar:**
-1. Clic "Execute Node"
+1. Clic "Execute Step"
 2. Enviar mensaje WhatsApp a tu número de prueba
 3. **Output esperado:**
    ```json
@@ -233,6 +233,7 @@
    }
    ```
 
+![10-nodo1-step.png](./images/10-nodo1-step.png)
 ---
 
 ### **NODO 2: AI Agent (Procesamiento)**
@@ -269,6 +270,9 @@
    - API Key: `sk-...` (del paso anterior)
 3. **Modelo:** `gpt-4o-mini`
 
+![13-nodo2-ai-chat-model.png](./images/13-nodo2-ai-chat-model.png)
+
+
 #### **Configurar Memory:**
 1. **Agregar Simple Memory:**
    - Buscar "Simple Memory" en Memory
@@ -282,12 +286,26 @@
 
 #### **Ejecutar y Probar:**
 1. Clic "Execute Node"
+
+
+![13-nodo2-ai-agent-output.png](./images/13-nodo2-ai-agent-output.png)
+
+#### **Ejecutar Workflow:**
+
+1. Regresa al workflow y dar a Execute Workflow, mostrará Waiting for trigger event
+
+2. Enviar mensaje al número: ¿Qués es n8n?
+
+3. Ingresar al nodo AI Agent
+
 2. **Output esperado:**
    ```json
    {
-     "output": "n8n es una herramienta de automatización de flujo de trabajo de código abierto que permite a los usuarios conectar diferentes aplicaciones y servicios para automatizar tareas repetitivas sin necesidad de programar extensivamente..."
+     "output": "n8n es una herramienta de automatización de flujos de trabajo (workflow automation) de código abierto. Permite conectar diferentes aplicaciones, servicios y APIs..."
    }
    ```
+
+![13-nodo2-ai-agent-output.png](./images/13-nodo2-ai-agent-output.png)
 
 ---
 
@@ -298,17 +316,20 @@
 2. Buscar: "WhatsApp Business Cloud"
 3. Seleccionar: "Send message" (Message Actions)
 
-![18-nodo3-send.png](./images/18-nodo3-send.png)
+
 
 #### **Configurar Credenciales:**
 1. **Usar misma credencial** del Nodo 1 o crear nueva:
    - Access Token: `EAAx...`
    - Business Account ID: `123...`
 
+![18-nodo3-create-credentials.png](./images/18-nodo3-create-credentials.png)
+![18-nodo3-credentials.png](./images/18-nodo3-credentials.png)
+
 #### **Configurar Mensaje:**
 
 1. **Sender Phone Number (or ID):**
-   - Seleccionar el número de prueba: `123456789`
+   - Seleccionar el número de prueba: `987654321` 
 
 2. **Recipient's Phone Number:**
    - Definir: "From another node's output"
@@ -330,6 +351,7 @@
 1. Clic "Execute Node"
 2. **Output esperado:**
 
+![18-nodo3-send.png](./images/18-nodo3-send.png)
 ---
 
 ## ✅ TESTING Y VALIDACIÓN
@@ -343,7 +365,7 @@
 ![21-activar-workflow.png](./images/21-activar-workflow.png)
 
 2. **Test End-to-End:**
-   - Enviar mensaje WhatsApp: "¿Qué es la inteligencia artificial?"
+   - Enviar mensaje WhatsApp: ""
    - Esperar respuesta automática del bot
    - Verificar en Executions que se ejecutó correctamente
 
